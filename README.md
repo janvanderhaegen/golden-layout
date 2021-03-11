@@ -22,3 +22,15 @@ Add `golden-layout` to your bower.json, or [download](https://golden-layout.com/
 
 ## License
 MIT
+
+## Make it work
+### Prerequisites
+Requires node 10. Use nvm (or nvm for windows)
+$ cd /to/your/project/
+$ nvm install 10
+$ nvm use 10.0.0
+$ npm install
+
+### Run
+$ cd /to/your/project/
+$ gulp build (or gulp dev)
