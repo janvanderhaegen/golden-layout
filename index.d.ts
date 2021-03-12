@@ -121,13 +121,13 @@ declare module 'golden-layout' {
          * @param indexInParent The index at which the child window's contents will be appended to. Default: null
          */
         createPopout(configOrContentItem: GoldenLayout.ItemConfigType | GoldenLayout.ContentItem,
-                     dimensions: {
-                         width: number,
-                         height: number,
-                         left: number,
-                         top: number
-                     }, parentId?: string,
-                     indexInParent?: number): void;
+            dimensions: {
+                width: number,
+                height: number,
+                left: number,
+                top: number
+            }, parentId?: string,
+            indexInParent?: number): void;
 
         /**
          * Turns a DOM element into a dragSource, meaning that the user can drag the element directly onto the layout
@@ -549,6 +549,16 @@ declare module 'golden-layout' {
              * Unselects the item. Only relevant if settings.selectionEnabled is set to true
              */
             deselect(): void;
+
+            /**
+             * Hides the item, but does not remove it from the configuration. This state is not serialized in the config.
+             */
+            forget(): void;
+
+            /**
+             * Shows the item IF it was previously forgotten
+             */
+            remember(): void;
 
             /**
              * Returns true if the item has the specified id or false if not
