@@ -562,6 +562,11 @@ declare module 'golden-layout' {
             remember(): void;
 
             /**
+             * Returns false if the item is forgotten or has content items (stack/column/row) and they are all forgotten
+             */
+            isRemembered(): void;
+
+            /**
              * Returns true if the item has the specified id or false if not
              * @param id An id to check for
              */
