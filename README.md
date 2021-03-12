@@ -3,6 +3,14 @@
 ![Screenshot](https://cloud.githubusercontent.com/assets/512416/4584449/e6c154a0-4ffa-11e4-81a8-a7e5f8689dc5.PNG)
 
 # [https://golden-layout.com/](https://golden-layout.com/)
+This is a branch taken from 1.5.9 (before the 2.0 rewrite in TS using modern module loaders).
+
+Our project requires that some panels have an optional visiblity. AKA, they should only be visible if some conditions are met, for example show a detail panel only if a record is selected in the main panel.  We couldn't implement this using existing functionality like adding/removing panels, because we serialize the layout and restore it on refresh. Having a panel not visible because of business logic isn't the same as the user closing that panel.
+
+Also, upgrading to the modern 2.0 version of this library would be too much work and have too many impacts due to our project not supporting modern module loaders.  We're not maintaining this or have plans for additional expansions.
+
+Note: the API methods added are called "remember" and "forget", to make sure we have no name clashes with existing (internal) methods "show" and "hide".
+
 
 ## Installation
 
