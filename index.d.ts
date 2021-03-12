@@ -399,6 +399,7 @@ declare module 'golden-layout' {
             dimensions?: Dimensions;
             labels?: Labels;
             content?: ItemConfigType[];
+            skipReact?: boolean;
         }
 
         export interface ContentItem extends EventEmitter {
