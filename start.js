@@ -27,11 +27,18 @@ $(function () {
     }
 
     window.myLayout = new GoldenLayout(config);
+
     document.querySelector('#hide-panel').onclick = function () {
-        alert('ok');
+        let item = window.myLayout.root.getItemsById('hideme')[0];
+        if (!item)
+            debugger;
+        item.forget();
     };
     document.querySelector('#show-panel').onclick = function () {
-        alert('ok');
+        let item = window.myLayout.root.getItemsById('hideme')[0];
+        if (!item)
+            debugger;
+        item.remember();
     };
 
 
