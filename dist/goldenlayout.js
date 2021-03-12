@@ -1763,16 +1763,6 @@ lm.utils.copy( lm.container.ItemContainer.prototype, {
 	}
 } );
 
-lm.errors.ConfigurationError = function( message, node ) {
-	Error.call( this );
-
-	this.name = 'Configuration Error';
-	this.message = message;
-	this.node = node;
-};
-
-lm.errors.ConfigurationError.prototype = new Error();
-
 /**
  * Pops a content item out into a new browser window.
  * This is achieved by
@@ -3058,6 +3048,16 @@ lm.utils.copy( lm.controls.TransitionIndicator.prototype, {
 		};
 	}
 } );
+lm.errors.ConfigurationError = function( message, node ) {
+	Error.call( this );
+
+	this.name = 'Configuration Error';
+	this.message = message;
+	this.node = node;
+};
+
+lm.errors.ConfigurationError.prototype = new Error();
+
 /**
  * This is the baseclass that all content items inherit from.
  * Most methods provide a subset of what the sub-classes do.
@@ -3129,7 +3129,7 @@ lm.utils.copy(lm.items.AbstractContentItem.prototype, {
         if (this.isForgotten)
             return false;
         if (this.contentItems && this.contentItems.length) {
-            return !!this.contentItems.find(r => !!r.isRemembered());
+            return !!this.contentItems.find(function (r) { return !!r.isRemembered(); });
         }
         return true;
     },
@@ -3161,7 +3161,7 @@ lm.utils.copy(lm.items.AbstractContentItem.prototype, {
     },
 
     childForgotten: function (contentItem) {
-        if (!this.contentItems.find(c => !!c.isRemembered()))
+        if (!this.contentItems.find(function (c) { return !!c.isRemembered(); }))
             this.forget({ redraw: false });
     },
 
@@ -3193,7 +3193,7 @@ lm.utils.copy(lm.items.AbstractContentItem.prototype, {
      * @private
      * */
     rememberedContentItems: function () {
-        return this.contentItems.filter(c => c.isRemembered());
+        return this.contentItems.filter(function (c) { return c.isRemembered(); });
     },
 
 
@@ -4549,16 +4549,16 @@ lm.utils.extend(lm.items.Stack, lm.items.AbstractContentItem);
 
 lm.utils.copy(lm.items.Stack.prototype, {
 
-    childRemembered(contentItem) {
+    childRemembered: function (contentItem) {
         const index = this.contentItems.indexOf(contentItem);
         if (index === -1) {
             throw new Error('Can\'t hide child. ContentItem is not child of this Stack');
         }
-        const header = this.header.tabs.find(h => h.contentItem === contentItem);
+        const header = this.header.tabs.find(function (h) { return h.contentItem === contentItem; });
         header.element.show();
         lm.items.AbstractContentItem.prototype.childRemembered.call(this, contentItem);
     },
-    childForgotten(contentItem) {
+    childForgotten: function (contentItem) {
         const index = this.contentItems.indexOf(contentItem);
         if (index === -1) {
             throw new Error('Can\'t hide child. ContentItem is not child of this Stack');
@@ -4566,7 +4566,7 @@ lm.utils.copy(lm.items.Stack.prototype, {
         if (this.contentItems.length <= 1) {
             //only child, so skip calculations because this stack will hide itself too
         } else {
-            const header = this.header.tabs.find(h => h.contentItem === contentItem);
+            const header = this.header.tabs.find(function (h) { h.contentItem === contentItem; });
             header.element.hide();
             if (this._activeContentItem == contentItem) {
                 const firstRememberedSibling = this.rememberedContentItems()[0];

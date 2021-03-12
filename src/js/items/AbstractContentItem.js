@@ -69,7 +69,7 @@ lm.utils.copy(lm.items.AbstractContentItem.prototype, {
         if (this.isForgotten)
             return false;
         if (this.contentItems && this.contentItems.length) {
-            return !!this.contentItems.find(r => !!r.isRemembered());
+            return !!this.contentItems.find(function (r) { return !!r.isRemembered(); });
         }
         return true;
     },
@@ -101,7 +101,7 @@ lm.utils.copy(lm.items.AbstractContentItem.prototype, {
     },
 
     childForgotten: function (contentItem) {
-        if (!this.contentItems.find(c => !!c.isRemembered()))
+        if (!this.contentItems.find(function (c) { return !!c.isRemembered(); }))
             this.forget({ redraw: false });
     },
 
@@ -133,7 +133,7 @@ lm.utils.copy(lm.items.AbstractContentItem.prototype, {
      * @private
      * */
     rememberedContentItems: function () {
-        return this.contentItems.filter(c => c.isRemembered());
+        return this.contentItems.filter(function (c) { return c.isRemembered(); });
     },
 
 
