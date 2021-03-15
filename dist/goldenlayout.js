@@ -4566,7 +4566,7 @@ lm.utils.copy(lm.items.Stack.prototype, {
         if (this.contentItems.length <= 1) {
             //only child, so skip calculations because this stack will hide itself too
         } else {
-            const header = this.header.tabs.find(function (h) { h.contentItem === contentItem; });
+            const header = this.header.tabs.find(function (h) { return h.contentItem === contentItem; });
             header.element.hide();
             if (this._activeContentItem == contentItem) {
                 const firstRememberedSibling = this.rememberedContentItems()[0];
