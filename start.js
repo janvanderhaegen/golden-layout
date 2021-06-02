@@ -446,6 +446,11 @@ $(function () {
                     type: 'row',
                     content: [
                         {
+                            title: 'This will NOT be hidden',
+                            type: 'component',
+                            componentName: 'html',
+                        },
+                        {
                             title: 'This will be hidden',
                             type: 'component',
                             componentName: 'html',

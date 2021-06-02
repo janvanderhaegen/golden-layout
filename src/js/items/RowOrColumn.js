@@ -481,10 +481,27 @@ lm.utils.copy(lm.items.RowOrColumn.prototype, {
      */
     _getItemsForSplitter: function (splitter) {
         var index = lm.utils.indexOf(splitter, this._splitter);
+        let before = index;
+        let beforeElement = this.contentItems[before];
+        while (beforeElement && !beforeElement.isRemembered()) {
+            beforeElement = this.contentItems[before--];
+        }
+
+        let after = index + 1;
+        let afterElement = this.contentItems[after];
+        while (afterElement && !afterElement.isRemembered()) {
+            afterElement = this.contentItems[after++];
+        }
+
+        if (!beforeElement || !afterElement) {
+            debugger;
+            beforeElement = this.contentItems[index];
+            afterElement = this.contentItems[index + 1]
+        }
 
         return {
-            before: this.contentItems[index],
-            after: this.contentItems[index + 1]
+            before: beforeElement,
+            after: afterElement
         };
     },
 
@@ -556,7 +573,6 @@ lm.utils.copy(lm.items.RowOrColumn.prototype, {
      * @returns {void}
      */
     _onSplitterDragStop: function (splitter) {
-
         var items = this._getItemsForSplitter(splitter),
             sizeBefore = items.before.element[this._dimension](),
             sizeAfter = items.after.element[this._dimension](),
