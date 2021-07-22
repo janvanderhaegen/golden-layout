@@ -98,11 +98,16 @@ lm.utils.copy(lm.items.AbstractContentItem.prototype, {
                 this.layoutManager.updateSize();
             }
         }
+        if (this.header)
+            this.header._updateTabSizes();
     },
 
     childForgotten: function (contentItem) {
         if (!this.contentItems.find(function (c) { return !!c.isRemembered(); }))
             this.forget({ redraw: false });
+        else
+            if (this.header)
+                this.header._updateTabSizes();
     },
 
     forget: function (options) {
@@ -124,6 +129,8 @@ lm.utils.copy(lm.items.AbstractContentItem.prototype, {
                 this.layoutManager.updateSize();
             }
         }
+        if (this.header)
+            this.header._updateTabSizes();
     },
 
 

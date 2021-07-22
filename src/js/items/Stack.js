@@ -45,6 +45,7 @@ lm.utils.copy(lm.items.Stack.prototype, {
         }
         const header = this.header.tabs.find(function (h) { return h.contentItem === contentItem; });
         header.element.show();
+        this.setActiveContentItem(contentItem, true);
         lm.items.AbstractContentItem.prototype.childRemembered.call(this, contentItem);
     },
     childForgotten: function (contentItem) {

@@ -18,6 +18,9 @@ $(function () {
         case 'simple-stack-invis':
             config = createSimpleStackInvisConfig();
             break;
+        case 'complex-stack-invis':
+            config = createComplexStackInvisConfig();
+            break;
         case 'complex-invis':
             config = createComplexInvisConfig();
             break;
@@ -28,17 +31,47 @@ $(function () {
 
     window.myLayout = new GoldenLayout(config);
 
-    document.querySelector('#hide-panel').onclick = function () {
-        let item = window.myLayout.root.getItemsById('hideme')[0];
-        if (!item)
+    document.querySelector('#hide-panel-1').onclick = function () {
+        let items = window.myLayout.root.getItemsById(`hideme-1`);
+        if (!items.length)
             debugger;
-        item.forget();
+        for (let i = 0; i < items.length; i++)
+            items[i].forget();
     };
-    document.querySelector('#show-panel').onclick = function () {
-        let item = window.myLayout.root.getItemsById('hideme')[0];
-        if (!item)
+    document.querySelector('#show-panel-1').onclick = function () {
+        let items = window.myLayout.root.getItemsById('hideme-1');
+        if (!items.length)
             debugger;
-        item.remember();
+        for (let i = 0; i < items.length; i++)
+            items[i].remember();
+    };
+    document.querySelector('#hide-panel-2').onclick = function () {
+        let items = window.myLayout.root.getItemsById(`hideme-2`);
+        if (!items.length)
+            debugger;
+        for (let i = 0; i < items.length; i++)
+            items[i].forget();
+    };
+    document.querySelector('#show-panel-2').onclick = function () {
+        let items = window.myLayout.root.getItemsById('hideme-2');
+        if (!items.length)
+            debugger;
+        for (let i = 0; i < items.length; i++)
+            items[i].remember();
+    };
+    document.querySelector('#hide-panel-3').onclick = function () {
+        let items = window.myLayout.root.getItemsById(`hideme-3`);
+        if (!items.length)
+            debugger;
+        for (let i = 0; i < items.length; i++)
+            items[i].forget();
+    };
+    document.querySelector('#show-panel-3').onclick = function () {
+        let items = window.myLayout.root.getItemsById('hideme-3');
+        if (!items.length)
+            debugger;
+        for (let i = 0; i < items.length; i++)
+            items[i].remember();
     };
 
 
@@ -454,7 +487,7 @@ $(function () {
                             title: 'This will be hidden',
                             type: 'component',
                             componentName: 'html',
-                            id: 'hideme'
+                            id: 'hideme-1'
                         },
                         {
                             title: 'This will NOT be hidden',
@@ -477,7 +510,7 @@ $(function () {
                             title: 'This will be hidden',
                             type: 'component',
                             componentName: 'html',
-                            id: 'hideme'
+                            id: 'hideme-1'
                         },
                         {
                             title: 'This will NOT be hidden',
@@ -491,7 +524,6 @@ $(function () {
     }
 
     function createSimpleStackInvisConfig() {
-
         return {
             content: [
                 {
@@ -506,12 +538,24 @@ $(function () {
                             title: 'This will be hidden',
                             type: 'component',
                             componentName: 'html',
-                            id: 'hideme'
+                            id: 'hideme-1'
                         },
                         {
                             title: 'This will NOT be hidden',
                             type: 'component',
                             componentName: 'html',
+                        },
+                        {
+                            title: 'This will be hidden',
+                            type: 'component',
+                            componentName: 'html',
+                            id: 'hideme-2'
+                        },
+                        {
+                            title: 'This will be hidden',
+                            type: 'component',
+                            componentName: 'html',
+                            id: 'hideme-3'
                         }
                     ]
                 }
@@ -519,6 +563,52 @@ $(function () {
         };
     }
 
+    function createComplexStackInvisConfig() {
+        return {
+            settings: {
+                tabOverlapAllowance: 25,
+                reorderOnTabMenuClick: false,
+                tabControlOffset: 5
+            },
+            content: [
+                {
+                    type: 'row',
+                    content: [
+                        {
+                            width: 40,
+                            title: 'This will NOT be hidden',
+                            type: 'component',
+                            componentName: 'html',
+                        },
+                        {
+                            width: 45,
+                            title: 'This will NOT be hidden',
+                            type: 'component',
+                            componentName: 'html',
+                        },
+                        {
+                            width: 15,
+                            type: 'stack',
+                            content: [
+                                {
+                                    title: 'This will be hidden 1',
+                                    type: 'component',
+                                    componentName: 'html',
+                                    id: 'hideme-1'
+                                },
+                                {
+                                    title: 'This will be hidden 2',
+                                    type: 'component',
+                                    componentName: 'html',
+                                    id: 'hideme-2'
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+    }
     function createComplexInvisConfig() {
         return {
             settings: {
@@ -589,7 +679,7 @@ $(function () {
                                     title: 'This will be hidden',
                                     type: 'component',
                                     componentName: 'html',
-                                    id: 'hideme'
+                                    id: 'hideme-1'
                                 },
                                 {
                                     title: 'This will NOT be hidden',
