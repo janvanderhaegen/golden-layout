@@ -632,10 +632,21 @@ lm.utils.copy(lm.LayoutManager.prototype, {
          * Don't include root into the possible drop areas though otherwise since it
          * will used for every gap in the layout, e.g. splitters
          */
-        if (allContentItems.length === 1) {
+        var hasComponentContentItem = false;
+        for (i = 0; i < allContentItems.length; i++) {
+            if (allContentItems[i].isComponent && !allContentItems[i].isForgotten) {
+                hasComponentContentItem = true;
+                break;
+            }
+        }
+
+        if (!hasComponentContentItem) {
             this._itemAreas.push(this.root._$getArea());
             return;
         }
+
+
+
         this._$createRootItemAreas();
 
         for (i = 0; i < allContentItems.length; i++) {
