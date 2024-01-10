@@ -32,6 +32,14 @@ Add `golden-layout` to your bower.json, or [download](https://golden-layout.com/
 MIT
 
 ## Make it work
+Press F5
+The browser uses the individual files (LayoutManager.js, Root.js etc). Press CTRL+F5 to refresh and pick up changes.
+
+Gulp/npm is broken due to old dependencies. Make changes to goldenlayout.js manually.
+
+Original steps below:
+
+
 ### Prerequisites
 Requires node 10. Use nvm (or nvm for windows)
 $ cd /to/your/project/
