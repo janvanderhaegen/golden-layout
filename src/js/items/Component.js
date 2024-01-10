@@ -18,7 +18,7 @@ lm.items.Component = function (layoutManager, config, parent) {
 
     this.isComponent = true;
     this.container = new lm.container.ItemContainer(this.config, this, layoutManager);
-    this.instance = new ComponentConstructor(this.container, componentConfig);
+    this.instance = ComponentConstructor(this.container, componentConfig);
     this.element = this.container._element;
 };
 

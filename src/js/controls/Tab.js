@@ -71,10 +71,10 @@ lm.utils.copy(lm.controls.Tab.prototype, {
      * @param {String} title can contain html
      */
     setTitle: function (title) {
-            const stripped = lm.utils.stripTags(title);
-            this.element.attr('title', stripped);
-            this.titleElement.html(title);
-            this.titleElement.attr('data-named-group-title', stripped);
+        const stripped = lm.utils.stripTags(title);
+        this.element.attr('title', stripped);
+        this.titleElement.html(title);
+        this.titleElement.attr('data-named-group-title', stripped);
     },
 
     /**

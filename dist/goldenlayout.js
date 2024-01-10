@@ -278,10 +278,10 @@
          */
         this.unbind = function (sEvent, fCallback, oContext) {
             if (!this._mSubscriptions[sEvent]) {
-                throw new Error('No subscribtions to unsubscribe for event ' + sEvent);
+                return;
             }
 
-            var i, bUnbound = false;
+            var i;
 
             for (i = 0; i < this._mSubscriptions[sEvent].length; i++) {
                 if
@@ -290,12 +290,7 @@
                     (!oContext || oContext === this._mSubscriptions[sEvent][i].ctx)
                 ) {
                     this._mSubscriptions[sEvent].splice(i, 1);
-                    bUnbound = true;
                 }
-            }
-
-            if (bUnbound === false) {
-                throw new Error('Nothing to unbind for ' + sEvent);
             }
         };
 
@@ -2515,7 +2510,7 @@
 
         this.isComponent = true;
         this.container = new lm.container.ItemContainer(this.config, this, layoutManager);
-        this.instance = new ComponentConstructor(this.container, componentConfig);
+        this.instance = ComponentConstructor(this.container, componentConfig);
         this.element = this.container._element;
     };
 
@@ -4911,8 +4906,10 @@
          * @param {String} title can contain html
          */
         setTitle: function (title) {
-            this.element.attr('title', lm.utils.stripTags(title));
+            const stripped = lm.utils.stripTags(title);
+            this.element.attr('title', stripped);
             this.titleElement.html(title);
+            this.titleElement.attr('data-named-group-title', stripped);
         },
 
         /**
